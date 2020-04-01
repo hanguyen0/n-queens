@@ -1,6 +1,7 @@
 // This file is a Backbone Model (don't worry about what that means)
 // It's part of the Board Visualizer
 // The only portions you need to work on are the helper functions (below)
+//one test push and commit! to HA!
 
 (function() {
 
@@ -79,12 +80,29 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+    var currentRow = this.attributes[rowIndex];
+    var piecesFound =0;
+    for(var i =0;i<currentRow.length-1;i++){
+
+   if(currentRow[i] !== 0){
+        piecesFound +=1;
+    }
+   if(piecesFound >=2){
+        return true;
+    }
+
+
+    }
+     if(piecesFound >=2){
+        return true;
+    }else{
+    return false;
+    }
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+
     },
 
 
