@@ -2,6 +2,7 @@
 // It's part of the Board Visualizer
 // The only portions you need to work on are the helper functions (below)
 //one test push and commit! to HA!
+//pushing over to Kit.
 
 (function() {
 
