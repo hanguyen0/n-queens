@@ -82,11 +82,11 @@
     // test if a specific row on this board contains a conflict
 
     hasRowConflictAt: function (rowIndex) {
-  
-      var currentRow = this.attributes[rowIndex];
-      var piecesFound = 0;
 
-      for (var i = 0; i < currentRow.length; i++) {
+      let currentRow = this.attributes[rowIndex];
+      let piecesFound = 0;
+
+      for (let i = 0; i < currentRow.length; i++) {
         let currentSquare = currentRow[i];
         if (currentSquare !== 0) {
           piecesFound += 1;
@@ -98,16 +98,16 @@
 
       }
       return false;
-  
+
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function () {
 
-      var amountOfRows = this.attributes.n;
-      for (var i = 0; i < amountOfRows; i++) {
-        var testRow = this.hasRowConflictAt(i);
-        
+      const amountOfRows = this.attributes.n;
+      for (let i = 0; i < amountOfRows; i++) {
+        let testRow = this.hasRowConflictAt(i);
+
         if (testRow == true) {
           return true;
         }
@@ -123,17 +123,17 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function (colIndex) {
-    var amountOfCol = this.attributes.n;
-    
-    //need to turn the values of attributes into an array
-    var tableMatrix = [];
-    for(var i = 0;i<amountOfCol;i++){
-    let current = this.attributes[i];
-    tableMatrix.push(current);//need to move arrays outside of { } into [ ]
-    }
- var piecesFound = 0;
+      let amountOfCol = this.attributes.n;
 
-       for (var i = 0; i < amountOfCol; i++) {
+      //need to turn the values of attributes into an array
+      let tableMatrix = [];
+      for (let i = 0; i < amountOfCol; i++) {
+        let current = this.attributes[i];
+        tableMatrix.push(current);//need to move arrays outside of { } into [ ]
+      }
+      let piecesFound = 0;
+
+      for (let i = 0; i < amountOfCol; i++) {
         let currentSquare = tableMatrix[i][colIndex];//colIndex dictates which column
         if (currentSquare !== 0) {
           piecesFound += 1;
@@ -149,10 +149,10 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function () {
-         var amountOfCol = this.attributes.n;
-      for (var i = 0; i < amountOfCol; i++) {
-        var testRow = this.hasColConflictAt(i);
-        
+      let amountOfCol = this.attributes.n;
+      for (let i = 0; i < amountOfCol; i++) {
+        let testRow = this.hasColConflictAt(i);
+
         if (testRow == true) {
           return true;
         }
@@ -167,12 +167,50 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function (majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      // let currentRow = this.attributes[majorDiagonalColumnIndexAtFirstRow];
+      // let piecesFound = 0
+      // let indexFound = [];
+      // //need to turn the values of attributes into an array
+      // let tableMatrix = [];
+      // for (let i = 0; i < amountOfCol; i++) {
+      //   let current = this.attributes[i];
+      //   tableMatrix.push(current);//need to move arrays outside of { } into [ ]
+      // }
+      // let piecesFound = 0;
+
+      // for (let i = 0; i < amountOfCol; i++) {
+      //   let currentSquare = tableMatrix[i][colIndex];//colIndex dictates which column
+      //   if (currentSquare !== 0) {
+      //     piecesFound += 1;
+      //   }
+      //   if (piecesFound > 1) {
+      //     return true;
+      //   }
+
+
+      // }
+      // //checking for pieces found at each index
+      // // indexFound = indexFound.sort()
+      // // let max = indexFound[indexFound.length - 1]
+      // // for (let i = 0; i < indexFound.length - 1; i++) {
+      // //   if ((indexFound[i] + 1) === indexFound[i + 1]) {
+      // //     return true;
+      // //   }
+      // // }
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function () {
-      return false; // fixme
+      // const amountOfRows = this.attributes.n;
+      // for (let i = 0; i < amountOfRows; i++) {
+      //   let testRow = this.hasMajorDiagonalConflictAt(i);
+
+      //   if (testRow == true) {
+      //     return true;
+      //   }
+      // }
+      return false;
     },
 
 
@@ -195,7 +233,7 @@
 
   });
 
-  var makeEmptyMatrix = function (n) {
+  const makeEmptyMatrix = function (n) {
     return _(_.range(n)).map(function () {
       return _(_.range(n)).map(function () {
         return 0;
