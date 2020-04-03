@@ -17,61 +17,50 @@
 
 
 window.findNRooksSolution = function (n) {
-  let solution = n; //fixme//idea is to place as many rooks as possible on n, n board
   let solutionsArray = [];
+  //create a board
+  let newBoard = new Board({ size: n })
+  let counter = 0;
 
-  //creating a new board in matrix is done like so= var board = new Board(n)
+  newBoard.evalRow(n);
 
-  //var board = new Board(n);- 4 === 4x4 - 4 rooks , 5 === 5x5 place- 5 rooks ,
-  for (let f = 0; f < n; f++) {
-    for (let e = 0; e < n; e++) {
-      let newBoard = new Board({ n: solution })//f, 0
-      newBoard.togglePiece(0, e);//first piece//0, e
+  //create a tree
+  function evalRow(row) {
+    //iterate through col in a row
 
-      //placing pieces on the same board is done by commands board.togglePiece(r,c); unplacing is calling the same piece
-      //iterate over row
-      for (let z = 0; z < n; z++) {//
-        //column
-        for (let i = 0; i < n; i++) {
-          //this is checking the square in the next row-
-          //*TODO- Check if the current space is occupied if so - continue;
-          if(newBoard.attributes[z][i] !== 0){//means that we already have a piece placed here
-            continue;
-          }
-          newBoard.togglePiece(z, i)//second piece
-          if (newBoard.hasAnyRowConflicts()) {
-            newBoard.togglePiece(z, i)//removes it
-          }
-          if (newBoard.hasAnyColConflicts()) {
-            newBoard.togglePiece(z, i)//removes it
-          }
-          if (!newBoard.hasAnyRowConflicts() && !newBoard.hasAnyColConflicts()) {
-            continue;
-          }
-        }
-
+    for (let i = 0; i < n; i++) {
+      //place a piece
+      newBoard.togglePiece([row][i]);//[0,0,0,0]
+      //if conflict found, remove that piece
+      if (newBoard.hasAnyRowConflicts() || newBoard.hasAnyColConflicts()) {
+        newBoard.togglePiece(row, i)//removes it
       }
-      solutionsArray.push(newBoard);
-    }
-  }
-  //left to right , top left to right
-  //rule is pieces stay in rows
-  //next must be in next row, but not same row or column as previous piece
 
-  //Base case- end of the board- all pieces placed- no more space- failure case pieces on board <n
-  //base case- return solution pieces on board == n
-  //for certain board- small boards there may not be solutions so that is a base case too
+      // newBoard.togglePiece([row][i]);
+    }
+    //access new row
+    newBoard.attribute[count]
+
+
+    //pass in the next row
+    evalRow(nextRow)//[0,0,0,0]
+  }
+  evalRow(newBoard)
+  //
+  //terminating a branch:
+  //if no more posibilities
+  //backtrack one step and try other possibilities
+  //if placed n rooks, push into solutionArray
+  //backtrack one step, reorganize possibilities
+  //if no more posibilities
+  //backtrack one step and try other possibilities
+  //rules for placement:
+  //left to right 0-n
+  //check if valid move
+  //if not valid, shift over by 1
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solutionsArray));
-  //Single solution for 4 rooks: {"0":[1,0,0,0],"1":[0,1,0,0],"2":[0,0,1,0],"3":[0,0,0,1],"n":4}
-  // solutionsArray.push(newBoard);
-  //return newBoard;
-  return solutionsArray//
-  // Single solution for 4 rooks:
-  /*[{"0":[1,0,0,0],"1":[0,1,0,0],"2":[0,0,1,0],"3":[0,0,0,1],"n":4},
-  {"0":[0,1,0,0],"1":[0,1,0,0],"2":[0,0,1,0],"3":[0,0,0,1],"n":4},
-  {"0":[0,0,1,0],"1":[0,1,0,0],"2":[0,0,1,0],"3":[0,0,0,1],"n":4},
-  {"0":[0,0,0,1],"1":[0,1,0,0],"2":[0,0,1,0],"3":[0,0,0,1],"n":4}]*/
+  return solutionsArray
 };
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
@@ -215,49 +204,12 @@ window.countNQueensSolutions = function (n) {
 "2":[0,1,0,0],
 "3":[0,0,0,0],"n":4}]
 
-/////////
-"{:[1,0,0,0],
-"1":[0,1,0,0],
-"2":[0,0,1,0],
-"3":[0,0,0,1],"n":4}"
-
-0": [0,1,0,0],
-"1":[1,0,0,0],
-"2":[0,0,1,0],
-"3":[0,0,0,1],"n":4}"
-
-2:  [0,0,1,0],
-"1":[1,0,0,0],
-"2":[0,1,0,0],
-"3":[0,0,0,1],"n":4}"
-
- 0":[0,0,0,1],
-"1":[1,0,0,0],
-"2":[0,1,0,0],
-"3":[0,0,1,0],"n":4}"
+/
 
 
-////missing
-"{:[0,0,0,1],
-"1":[0,0,1,0],
-"2":[0,1,0,0],
-"3":[1,0,0,0],"n":4}"
 
 
-//Other possible solutions
-"{: [0,0,0,1],
-"1":[0,0,1,0],
-"2":[0,1,0,0],
-"3":[1,0,0,0],"n":4}"
 
-"{: [0,1,0,0],
-"1":[0,0,0,1],
-"2":[0,0,1,0],
-"3":[1,0,0,0],"n":4}"
 
-"{: [0,0,1,0],
-"1":[1,0,0,0],
-"2":[0,0,0,1],
-"3":[0,1,0,0],"n":4}"
 
 */
