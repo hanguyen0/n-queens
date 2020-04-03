@@ -21,31 +21,61 @@ window.findNRooksSolution = function (n) {
   //create a board
   let newBoard = new Board({ size: n })
   let counter = 0;
-
+  let solutionCount = 0;
   newBoard.evalRow(n);
-
+  let visitted = {};
   //create a tree
   function evalRow(row) {
     //iterate through col in a row
 
     for (let i = 0; i < n; i++) {
       //place a piece
-      newBoard.togglePiece([row][i]);//[0,0,0,0]
-      //if conflict found, remove that piece
-      if (newBoard.hasAnyRowConflicts() || newBoard.hasAnyColConflicts()) {
-        newBoard.togglePiece(row, i)//removes it
-      }
 
+      newBoard.togglePiece([row][i]);//[0,0,0,1]
+      //if conflict found, remove that piece
+      if (!newBoard.hasAnyRowConflicts() || !newBoard.hasAnyColConflicts()) {
+
+        if (visited.attributes[row] === newBoard.attributes[row]) {
+          //move on to next i
+          continue;
+
+        } else {
+          //assign that row to the row in visited
+          visited.attributes[row] = newBoard.attributes[row];
+        }
+
+
+        evalRow(row + 1);
+      }
+      //access new row
+      // newBoard.attribute[count]
+      //pass in the children of i
+      // newBoard.togglePiece([row][i]);//[0,0,0,0]
+      // evalRow(row + 1)//[0,0,0,0]
       // newBoard.togglePiece([row][i]);
     }
-    //access new row
-    newBoard.attribute[count]
+    var lastResult = [row][i]
+
+
+    solutionCount += 1
+    //untoggle the last 2  pieces
+    newBoard.togglePiece([row][i]);
+    for (let i = n - 1; i >= 0; i--) {//[0,0,0,0]
+      if (newBoard.attributes[z][i] !== 0) {//means that we already have a piece placed here
+        newBoard.togglePiece([row][i]);
+        continue;
+      };//[0,0,0,0]
+
+      evalRow(n - 1)//[0,0,0,0]
+    }
 
 
     //pass in the next row
-    evalRow(nextRow)//[0,0,0,0]
+
   }
-  evalRow(newBoard)
+
+
+  evalRow(count);
   //
   //terminating a branch:
   //if no more posibilities
